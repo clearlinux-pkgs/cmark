@@ -4,13 +4,12 @@
 #
 Name     : cmark
 Version  : 0.30.2
-Release  : 2
+Release  : 3
 URL      : https://github.com/commonmark/cmark/archive/refs/tags/0.30.2.tar.gz
 Source0  : https://github.com/commonmark/cmark/archive/refs/tags/0.30.2.tar.gz
 Summary  : CommonMark parsing, rendering, and manipulation
 Group    : Development/Tools
 License  : BSD-3-Clause
-Requires: cmark-bin = %{version}-%{release}
 Requires: cmark-lib = %{version}-%{release}
 Requires: cmark-license = %{version}-%{release}
 Requires: cmark-man = %{version}-%{release}
@@ -23,20 +22,10 @@ cmark
 [![CI
 tests](https://github.com/commonmark/cmark/workflows/CI%20tests/badge.svg)](https://github.com/commonmark/cmark/actions)
 
-%package bin
-Summary: bin components for the cmark package.
-Group: Binaries
-Requires: cmark-license = %{version}-%{release}
-
-%description bin
-bin components for the cmark package.
-
-
 %package dev
 Summary: dev components for the cmark package.
 Group: Development
 Requires: cmark-lib = %{version}-%{release}
-Requires: cmark-bin = %{version}-%{release}
 Provides: cmark-devel = %{version}-%{release}
 Requires: cmark = %{version}-%{release}
 
@@ -78,7 +67,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1647874624
+export SOURCE_DATE_EPOCH=1647875548
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -101,20 +90,18 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 cd clr-build; make test || :
 
 %install
-export SOURCE_DATE_EPOCH=1647874624
+export SOURCE_DATE_EPOCH=1647875548
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cmark
 cp %{_builddir}/cmark-0.30.2/COPYING %{buildroot}/usr/share/package-licenses/cmark/fa524e3e5b56232fdada455ba84c938f5a1487d2
 pushd clr-build
 %make_install
 popd
+## Remove excluded files
+rm -f %{buildroot}*/usr/bin/cmark
 
 %files
 %defattr(-,root,root,-)
-
-%files bin
-%defattr(-,root,root,-)
-/usr/bin/cmark
 
 %files dev
 %defattr(-,root,root,-)
