@@ -7,7 +7,7 @@
 #
 Name     : cmark
 Version  : 0.31.1
-Release  : 8
+Release  : 9
 URL      : https://github.com/commonmark/cmark/archive/0.31.1/cmark-0.31.1.tar.gz
 Source0  : https://github.com/commonmark/cmark/archive/0.31.1/cmark-0.31.1.tar.gz
 Summary  : CommonMark parsing, rendering, and manipulation
